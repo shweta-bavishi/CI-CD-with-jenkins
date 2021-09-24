@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh 'cross-env CI=true react-scripts test --env=jsdom'
             }
         }
     }
