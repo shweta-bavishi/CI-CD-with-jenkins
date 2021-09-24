@@ -20,7 +20,7 @@ phases:
       - echo Testing
       - yarn test
       - echo Building
-      - yarn build
+      - yarn run build
 artifacts:
   files:
     - "**/*"
