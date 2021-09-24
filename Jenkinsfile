@@ -23,7 +23,6 @@ pipeline {
             steps {
                 sh 'npm run build' 
                 input message: 'Finished using the web site? (Click "Proceed" to continue)' 
-                sh 'kill $(cat .pidfile)'
             }
         }
     }
