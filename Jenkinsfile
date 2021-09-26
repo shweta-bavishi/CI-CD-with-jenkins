@@ -1,29 +1,29 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:6-alpine'
-      args '-p 3000:3000'
+    agent {
+        docker {
+            image 'node:lts-buster-slim' 
+            args '-p 3000:3000' 
+        }
     }
-
-  }
-  stages {
-    stage('Build') {
-      steps {
-        echo 'Building'
-      }
+    environment {
+        CI = 'true' 
     }
-
-    stage('Test') {
-      steps {
-        echo 'Testing'
-      }
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'npm install' 
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm run test'
+            }
+        }
+        stage('Deliver') { 
+            steps {
+                sh 'npm run build' 
+                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
+            }
+        }
     }
-
-    stage('Deploy') {
-      steps {
-        echo 'Deploying'
-      }
-    }
-
-  }
 }
